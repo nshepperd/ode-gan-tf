@@ -1,5 +1,7 @@
+"""Test ode_gan on a mixture of gaussians distribution, similar to the one in the paper."""
+
 import tensorflow as tf
-from ode_gan import GANOptimizer
+import ode_gan
 
 def generator(z):
     with tf.variable_scope('generator', reuse=tf.AUTO_REUSE):
@@ -51,7 +53,7 @@ if __name__ == '__main__':
         g_params = [v for v in tf.trainable_variables() if 'generator' in v.name]
         d_params = [v for v in tf.trainable_variables() if 'discriminator' in v.name]
 
-        opt = GANOptimizer(g_params=g_params, d_params=d_params, g_loss=g_loss, d_loss=d_loss)
+        opt = ode_gan.RK2(g_params=g_params, d_params=d_params, g_loss=g_loss, d_loss=d_loss)
 
         sess.run(tf.global_variables_initializer())
 
