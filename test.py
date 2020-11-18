@@ -53,7 +53,7 @@ if __name__ == '__main__':
         g_params = [v for v in tf.trainable_variables() if 'generator' in v.name]
         d_params = [v for v in tf.trainable_variables() if 'discriminator' in v.name]
 
-        opt = ode_gan.RK2(g_params=g_params, d_params=d_params, g_loss=g_loss, d_loss=d_loss)
+        opt = ode_gan.RK4(g_params=g_params, d_params=d_params, g_loss=g_loss, d_loss=d_loss, lr=0.2)
 
         sess.run(tf.global_variables_initializer())
 

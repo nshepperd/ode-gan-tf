@@ -9,8 +9,9 @@ def mkname(*args):
     for arg in args:
         if type(arg) is str:
             out.append(arg)
-        elif arg.name.endswith(':0'):
-            out.append(arg.name[:-2])
+        elif hasattr(arg, 'name'):
+            # Variables
+            out.append(arg.name.rsplit(':', 1)[0])
         else:
             assert False
     return '/'.join(out)
